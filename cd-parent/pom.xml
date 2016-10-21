@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>pl.sarzalski.test.cd</groupId>
+    <artifactId>cd-parent</artifactId>
+    <version>0.0.10-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <cd-utils.version>0.1.0-RC1</cd-utils.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>../cd-client</module>
+                <module>../cd-impl</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>utils</id>
+            <modules>
+                <module>../cd-utils</module>
+            </modules>
+        </profile>
+    </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>pl.sarzalski.test.cd</groupId>
+                <artifactId>cd-utils</artifactId>
+                <version>${cd-utils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.sarzalski.test.cd</groupId>
+                <artifactId>cd-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>internal-releases</id>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>internal-snapshots</id>
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
